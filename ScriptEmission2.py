@@ -11,21 +11,10 @@ Tstep = 10
 logn_min = 1 #(1)
 logn_max = 8 
 logn_step = 0.5 #(0.2)
-
-
-
-
-
-
-
-
-
-
-
 N = 1e+18
 my_prefix = "radex_source_"
 omega_s = 0.5**2  
-linewidth = 100  # 100, 200, 400 km/s
+linewidth = 100  # 100, 200, 400
 
 ##
 ##  Create radex input file(s)
