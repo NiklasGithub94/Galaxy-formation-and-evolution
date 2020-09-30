@@ -45,7 +45,7 @@ W0410_98_error=0.4
 
 
 
-#Expected
+#Radex software
 data = loadtxt("radex_extract_data1e18_z=3.12.txt", unpack="True", usecols=(1,2,3,4,5,6,7,8,9,10,11,12), comments="#")
 F10_list = np.array(data[3,:])*W0149_43/np.array(data[6,:])
 F21_list = np.array(data[4,:])*W0149_43/np.array(data[6,:])
@@ -111,38 +111,18 @@ for index in range (len(F76_list)):
 	reduced_chi_squared = 1.0/(9-2)*( (((f_exp[0]-v[0])/yerror[0])**2) + (((f_exp[1]-v[1])/yerror[1])**2))
 	l_x2[i][j] = np.log10(reduced_chi_squared)
 	i=i+1
-
-	#elif(F76_list[index] > JUpper):
-	#	l_x2[i][j] = np.nan
-	#	i=i+1 
-	#[F10_list[index], F43_list[index], , F98_list[index]
-	#f_exp=np.array([F43_list[index],F65_list[index], F76_list[index]])
-	#reduced_chi_squared = 1.0/(9-5)*sum(((f_exp-v)/yerror)**2) 
-	#f_exp=np.array([F43_list[index-k], F98_list[index-k]])
-	#f_exp=np.array([F10_list[index], F43_list[index], F65_list[index], F76_list[index], F98_list[index]])
-	#if (np.log10(reduced_chi_squared) > 4.2):
-	#	l_x2[i][j] = np.nan
-	#	i=i+1
-	#f_exp=np.array([F43_list[index-k], F65_list[index-k],F76_list[index-k]])
-	#reduced_chi_squared = 1.0/(9-2)*( (((f_exp[0]-v[0])/yerror[0])**2) + (((f_exp[1]-v[1])/yerror[1])**2))
-
 	
-	
-		#f_exp = np.array([F10_list[index-k], F43_list[index-k], F65_list[index-k], F76_list[index-k]])
-		#f_exp = np.array([F43_list[index-k],F98_list[index-k]])
-		#reduced_chi_squared = 1.0/(8-4)*( (((f_exp[0]-v[0])/yerror[0])**2) + (((f_exp[1]-v[1])/yerror[1])**2)+(((f_exp[2]-v[2])/yerror[2])**2) + (((f_exp[3]-v[3])/yerror[3])**2) )
-		#reduced_chi_squared = 1.0/(9-3)*sum(((f_exp-v)/yerror)**2) 		
 		
-	#elif(F76_list[index] > JUpper):
-	#		l_x2[i][j] = np.nan
-	#		i=i+1
-	#chi=chisquare([co65_100, co76_100],[F65_list[index-k],F76_list[index-k]])
-	#chi=chisquare([Obs_43, co65_100, co76_100],[F43_list[index-k], F65_list[index-k],F76_list[index-k]], ddof=6)
-	#chi=chisquare([ W0149_43, W0149_98 ], [ F43_list[index-k], F98_list[index-k] ])
-	#chi=chisquare([W0410_10, W0410_43, W0410_65, W0410_76],[F10_list[index-k], F43_list[index-k], F65_list[index-k], F76_list[index-k]])
-	#chi=chisquare([W0410_65, W0410_76, W0410_98],[F65_list[index-k], F76_list[index-k], F98_list[index-k]])
-	#chi=chisquare([W0410_10, W0410_43, W0410_65],[F10_list[index-k], F43_list[index-k], F65_list[index-k]])
-	#l_x2[i][j] = np.log10(chi[0]) 
+	elif(F76_list[index] > JUpper): #For all models, where peak flux density of CO(7-6) is larger than 5 sigma, replace with NaN
+			l_x2[i][j] = np.nan
+			i=i+1
+	chi=chisquare([co65_100, co76_100],[F65_list[index-k],F76_list[index-k]])
+	chi=chisquare([Obs_43, co65_100, co76_100],[F43_list[index-k], F65_list[index-k],F76_list[index-k]], ddof=6)
+	chi=chisquare([ W0149_43, W0149_98 ], [ F43_list[index-k], F98_list[index-k] ])
+	chi=chisquare([W0410_10, W0410_43, W0410_65, W0410_76],[F10_list[index-k], F43_list[index-k], F65_list[index-k], F76_list[index-k]])
+	chi=chisquare([W0410_65, W0410_76, W0410_98],[F65_list[index-k], F76_list[index-k], F98_list[index-k]])
+	chi=chisquare([W0410_10, W0410_43, W0410_65],[F10_list[index-k], F43_list[index-k], F65_list[index-k]])
+	l_x2[i][j] = np.log10(chi[0]) 
 	
 		
 			
